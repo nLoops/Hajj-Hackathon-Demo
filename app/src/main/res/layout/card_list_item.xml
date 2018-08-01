@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/dimen_eight_dp"
+  >
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+      android:id="@+id/iv_card_item"
+      android:layout_width="match_parent"
+      android:layout_height="150dp"
+      android:contentDescription="@string/card_item_desc"
+      android:tint="@color/colorAccent"
+      tools:src="@drawable/ic_map"
+      />
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal|bottom"
+      android:padding="@dimen/dimen_eight_dp"
+      android:background="@color/colorBackGroundCard"
+      android:orientation="vertical"
+      >
+
+      <TextView
+        android:id="@+id/tv_card_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorCardText"
+        android:textSize="@dimen/card_item_text_size"
+        tools:text="Hajji"
+        />
+
+      <TextView
+        android:id="@+id/tv_card_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorCardStatus"
+        android:textSize="@dimen/card_status_text_size"
+        tools:text="offline"
+        />
+
+    </LinearLayout>
+
+  </FrameLayout>
+
+</android.support.v7.widget.CardView>
