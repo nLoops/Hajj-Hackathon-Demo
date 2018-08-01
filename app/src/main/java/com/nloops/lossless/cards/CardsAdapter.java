@@ -15,12 +15,21 @@ import java.util.ArrayList;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder> {
 
+  /*ref of Card Click interface*/
+  private OnCardClickListener mListener;
 
   /*this array list will holds the models that needs to display*/
   private ArrayList<CardModel> mModelsArrayList;
 
-  public CardsAdapter(ArrayList<CardModel> models) {
+  public CardsAdapter(ArrayList<CardModel> models, OnCardClickListener listener) {
     this.mModelsArrayList = models;
+    this.mListener = listener;
+  }
+
+  /*Declare Interface for Card Click*/
+  public interface OnCardClickListener {
+
+    void onCardClick(int position);
   }
 
   @NonNull
@@ -51,7 +60,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder> {
   /**
    * This class will holds the Views for each Element in {@link #mModelsArrayList}
    */
-  class CardsViewHolder extends RecyclerView.ViewHolder {
+  class CardsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     @BindView(R.id.iv_card_item)
     ImageView mCardImageView;
@@ -63,6 +72,12 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder> {
     public CardsViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
+      itemView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+      mListener.onCardClick(getAdapterPosition());
     }
   }
 
