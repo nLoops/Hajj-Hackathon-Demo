@@ -42,14 +42,20 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder(@NonNull CardsViewHolder holder, int position) {
-    /*Get the Current Model upon position*/
-    CardModel currentModel = mModelsArrayList.get(position);
-    /*Set Current View elements values*/
-    holder.mCardImageView.setImageResource(currentModel.getCardImageID());
-    holder.mCardName.setText(currentModel.getCardName());
-    holder.mCardStatus.setText(currentModel.getCardStatus());
-
+  public void onBindViewHolder(@NonNull final CardsViewHolder holder, int position) {
+    if (mModelsArrayList != null && !mModelsArrayList.isEmpty()) {
+      /*Get the Current Model upon position*/
+      final CardModel currentModel = mModelsArrayList.get(position);
+      /*Set Current View elements values*/
+      holder.mCardImageView.post(new Runnable() {
+        @Override
+        public void run() {
+          holder.mCardImageView.setImageResource(currentModel.getCardImageID());
+        }
+      });
+      holder.mCardName.setText(currentModel.getCardName());
+      holder.mCardStatus.setText(currentModel.getCardStatus());
+    }
   }
 
   @Override
