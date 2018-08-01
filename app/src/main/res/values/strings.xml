@@ -1,4 +1,13 @@
 <resources>
   <string name="app_name">LossLess</string>
   <string name="title_activity_maps">Map</string>
+  <string name="permissions_required">This app needs your permissions to access to location
+    to serve you find your camping</string>
+  <string name="user_your_location">You Are Here!</string>
+  <string name="google_api_lost">Cannot connect to server, try again</string>
+  <string name="card_item_desc">Card Of Definitions</string>
+  <string name="str_mock_haji_name">Haji</string>
+  <string name="str_mock_guide_name">Guide</string>
+  <string name="str_moc_init_status">offline</string>
+  <string name="title_activity_guide">Map</string>
 </resources>
