@@ -26,11 +26,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.nloops.lossless.models.Guide;
 import com.nloops.lossless.utilis.Constants;
 import java.util.ArrayList;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -50,6 +49,7 @@ public class GuideActivity extends FragmentActivity implements OnMapReadyCallbac
   private boolean isFirstLaunchFlag;
   private GeoFire geoFire;
   private FirebaseDatabase mDatabase;
+  private Guide currentGuide;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +59,23 @@ public class GuideActivity extends FragmentActivity implements OnMapReadyCallbac
     getPermissions();
     /*Set flag true*/
     isFirstLaunchFlag = true;
+    /*init Database*/
+    mDatabase = FirebaseDatabase.getInstance();
+    /*Define CurrentGuide Data*/
+    currentGuide = new Guide(true);
     // Obtain the SupportMapFragment and get notified when the map is ready to be used.
     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
         .findFragmentById(R.id.map);
     mapFragment.getMapAsync(this);
   }
 
+  @Override
+  protected void onResume() {
+    super.onResume();
+    DatabaseReference guideRef = mDatabase.getReference(Constants.GUIDE_GENERAL_REF)
+        .child("guide_data");
+    guideRef.setValue(currentGuide);
+  }
 
   @Override
   public void onMapReady(GoogleMap googleMap) {
@@ -125,7 +136,6 @@ public class GuideActivity extends FragmentActivity implements OnMapReadyCallbac
       mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
     }
 
-    mDatabase = FirebaseDatabase.getInstance();
     geoFire = new GeoFire(mDatabase.getReference(Constants.GUIDE_GENERAL_REF));
     GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
     geoFire.setLocation(Constants.GUIDE_GEO_FIRE_KEY, geoLocation, new CompletionListener() {
@@ -139,21 +149,11 @@ public class GuideActivity extends FragmentActivity implements OnMapReadyCallbac
   @Override
   protected void onStop() {
     super.onStop();
-    DatabaseReference reference = mDatabase.getReference(Constants.GUIDE_GENERAL_REF);
-    reference.addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-          snapshot.getRef().removeValue();
-        }
-      }
-
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
-
-      }
-    });
     geoFire.removeLocation(Constants.GUIDE_GEO_FIRE_KEY);
+    currentGuide.setGuideOnline(false);
+    DatabaseReference guideRef = mDatabase.getReference(Constants.GUIDE_GENERAL_REF)
+        .child("guide_data");
+    guideRef.setValue(currentGuide);
   }
 
   /**
