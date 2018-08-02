@@ -9,7 +9,10 @@
   <string name="str_mock_haji_name">Haji</string>
   <string name="str_mock_guide_name">Guide</string>
   <string name="str_moc_init_status">offline</string>
+  <string name="str_mock_guide_online">online</string>
   <string name="title_activity_guide">Map</string>
   <string name="user_your_guide_location">Your Guide</string>
   <string name="str_edit_search">Search</string>
+  <string name="str_cancel_button">Cancel</string>
+  <string name="str_start_button">Start</string>
 </resources>
