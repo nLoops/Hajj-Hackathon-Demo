@@ -7,6 +7,7 @@
   android:layout_height="match_parent">
 
   <android.support.v7.widget.CardView
+    android:id="@+id/search_bar_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/edit_text_map"
     android:layout_margin="@dimen/dimen_eight_dp"
@@ -14,12 +15,27 @@
     app:cardCornerRadius="@dimen/dimen_four_dp">
 
     <EditText
+      android:id="@+id/edit_map_search"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingStart="@dimen/dimen_sixteen_dp"
+      android:paddingEnd="@dimen/dimen_sixteen_dp"
       android:paddingLeft="@dimen/dimen_sixteen_dp"
+      android:paddingRight="@dimen/dimen_sixteen_dp"
       android:background="@null"
       android:hint="@string/str_edit_search"
+      android:imeOptions="actionDone"
+      android:inputType="text"
+      android:maxLines="1"
+      />
+
+    <ImageButton
+      android:id="@+id/btn_edit_search"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:background="@drawable/item_back_selector"
+      android:src="@drawable/ic_search"
       />
 
   </android.support.v7.widget.CardView>
@@ -37,9 +53,116 @@
     android:layout_height="56dp"
     android:layout_margin="@dimen/dimen_eight_dp"
     android:layout_gravity="bottom|end"
-    android:onClick="setLostRequest"
     android:src="@drawable/ic_route"
     android:tint="@android:color/white"
+    android:visibility="gone"
     />
+
+  <android.support.v7.widget.CardView
+    android:id="@+id/dest_views_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_eight_dp"
+    android:layout_gravity="bottom"
+    android:elevation="@dimen/dimen_four_dp"
+    android:visibility="gone"
+    app:cardCornerRadius="@dimen/dimen_four_dp"
+    tools:visibility="visible">
+
+    <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="@dimen/dimen_eight_dp"
+      >
+      <TextView
+        android:id="@+id/tv_dest_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Going to Arrafat"
+        android:textSize="@dimen/card_item_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Going to Arrafat"
+        />
+      <TextView
+        android:id="@+id/tv_dest_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="10 minutes"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/card_status_text_size"
+        app:layout_constraintLeft_toLeftOf="@id/tv_dest_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_dest_name"
+        tools:text="34:20"
+        />
+      <Button
+        android:id="@+id/cancel_route"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/str_cancel_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+    </android.support.constraint.ConstraintLayout>
+
+  </android.support.v7.widget.CardView>
+  <android.support.v7.widget.CardView
+    android:id="@+id/dest_start_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_eight_dp"
+    android:layout_gravity="bottom"
+    android:elevation="@dimen/dimen_four_dp"
+    android:visibility="gone"
+    app:cardCornerRadius="@dimen/dimen_four_dp"
+    tools:visibility="visible">
+
+    <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:padding="@dimen/dimen_eight_dp"
+      >
+      <TextView
+        android:id="@+id/tv_start_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Going to Arrafat"
+        android:textSize="@dimen/card_item_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Going to Arrafat"
+        />
+      <TextView
+        android:id="@+id/tv_start_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="10 minutes"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/card_status_text_size"
+        app:layout_constraintLeft_toLeftOf="@id/tv_start_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_name"
+        tools:text="34:20"
+        />
+      <Button
+        android:id="@+id/start_route"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/str_start_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+    </android.support.constraint.ConstraintLayout>
+
+  </android.support.v7.widget.CardView>
 
 </FrameLayout>

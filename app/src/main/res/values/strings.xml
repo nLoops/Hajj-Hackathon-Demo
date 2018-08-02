@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">LossLess</string>
+  <string name="app_name">LessLost</string>
   <string name="title_activity_maps">Map</string>
   <string name="permissions_required">This app needs your permissions to access to location
     to serve you find your camping</string>
