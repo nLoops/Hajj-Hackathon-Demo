@@ -1,6 +1,8 @@
 package com.nloops.lossless.cards;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +22,12 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder> {
 
   /*this array list will holds the models that needs to display*/
   private ArrayList<CardModel> mModelsArrayList;
+  private Context mContext;
 
-  public CardsAdapter(ArrayList<CardModel> models, OnCardClickListener listener) {
+  public CardsAdapter(ArrayList<CardModel> models, OnCardClickListener listener, Context context) {
     this.mModelsArrayList = models;
     this.mListener = listener;
+    this.mContext = context;
   }
 
   /*Declare Interface for Card Click*/
@@ -55,6 +59,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsViewHolder> {
       });
       holder.mCardName.setText(currentModel.getCardName());
       holder.mCardStatus.setText(currentModel.getCardStatus());
+      if (currentModel.getCardName().equals(mContext.getString(R.string.str_mock_guide_name))) {
+        holder.mCardStatus.setTextColor(ContextCompat.getColor(mContext, R.color.colorGreen));
+      }
     }
   }
 

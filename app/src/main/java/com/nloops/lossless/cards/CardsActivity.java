@@ -43,7 +43,8 @@ public class CardsActivity extends AppCompatActivity implements CardsAdapter.OnC
     /*call sign in*/
     signIn();
     /*init and feed adapter with data*/
-    mAdapter = new CardsAdapter(Utilis.createListModels(CardsActivity.this), this);
+    mAdapter = new CardsAdapter(Utilis.createListModels(CardsActivity.this), this,
+        this);
     /*Setup RecyclerView*/
     GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL,
         false);
