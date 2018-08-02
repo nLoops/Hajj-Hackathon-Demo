@@ -10,4 +10,6 @@
   <string name="str_mock_guide_name">Guide</string>
   <string name="str_moc_init_status">offline</string>
   <string name="title_activity_guide">Map</string>
+  <string name="user_your_guide_location">Your Guide</string>
+  <string name="str_edit_search">Search</string>
 </resources>
