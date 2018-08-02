@@ -31,6 +31,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -38,9 +39,14 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.maps.android.clustering.ClusterManager;
+import com.nloops.lossless.models.MyItem;
 import com.nloops.lossless.utilis.Constants;
+import com.nloops.lossless.utilis.MyItemReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONException;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class HajiActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -76,6 +82,9 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
   private List<Polyline> polylines;
   /*Test location for testing routes*/
   private LatLng testLocation;
+
+
+  private ClusterManager<MyItem> mClusterManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +148,15 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
         return true;
       }
     });
+    mClusterManager = new ClusterManager<MyItem>(this, mMap);
+    mMap.setOnCameraIdleListener(mClusterManager);
+    try {
+      readItems();
+    } catch (JSONException e) {
+      Log.i(TAG, "onMapReady: " + e.getMessage());
+      Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
+    }
+
   }
 
   public void setLostRequest(View view) {
@@ -204,7 +222,8 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
       /*Convert user coordinates into LatLng object.*/
       LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
       Marker userMarker = mMap.addMarker(new MarkerOptions().position(userLatLng)
-          .title(getString(R.string.user_your_location)));
+          .title(getString(R.string.user_your_location))
+          .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_user_marker)));
       userMarker.showInfoWindow();
       mMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLng));
       mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
@@ -220,7 +239,8 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mGuideLocation = new LatLng(location.latitude, location.longitude);
         guideMarker = mMap.addMarker(new MarkerOptions()
-            .position(mGuideLocation).title("Your Guide"));
+            .position(mGuideLocation).title(getString(R.string.user_your_guide_location))
+            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_guide_marker)));
 
       }
 
@@ -306,6 +326,12 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
     Log.i(TAG, "onConnectionFailed: " + connectionResult.getErrorMessage());
     Toast.makeText(getApplicationContext(),
         getString(R.string.google_api_lost), Toast.LENGTH_LONG).show();
+  }
+
+  private void readItems() throws JSONException {
+    InputStream inputStream = getResources().openRawResource(R.raw.arrafat_coordinate);
+    List<MyItem> items = new MyItemReader().read(inputStream);
+    mClusterManager.addItems(items);
   }
 
 }
