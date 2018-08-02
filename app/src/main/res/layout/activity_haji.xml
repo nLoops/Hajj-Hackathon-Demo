@@ -16,7 +16,8 @@
     <EditText
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:padding="@dimen/dimen_four_dp"
+      android:paddingStart="@dimen/dimen_sixteen_dp"
+      android:paddingLeft="@dimen/dimen_sixteen_dp"
       android:background="@null"
       android:hint="@string/str_edit_search"
       />
