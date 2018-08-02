@@ -16,8 +16,6 @@
       android:layout_width="match_parent"
       android:layout_height="150dp"
       android:contentDescription="@string/card_item_desc"
-      android:tint="@color/colorAccent"
-      tools:src="@drawable/ic_muslim"
       />
     <LinearLayout
       android:layout_width="match_parent"
