@@ -6,4 +6,6 @@
   <color name="colorBackGroundCard">#80000000</color>
   <color name="colorCardText">#FFFFFF</color>
   <color name="colorCardStatus">#80FFFFFF</color>
+  <color name="colorSelector">#20e2dede</color>
+  <color name="colorGreen">#11e049</color>
 </resources>
