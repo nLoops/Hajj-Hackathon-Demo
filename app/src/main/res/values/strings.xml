@@ -15,4 +15,6 @@
   <string name="str_edit_search">Search</string>
   <string name="str_cancel_button">Cancel</string>
   <string name="str_start_button">Start</string>
+  <string name="str_enter_camping">Enter your camping number</string>
+  <string name="str_sign_in">Sign in</string>
 </resources>

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3799FB</color>
-  <color name="colorPrimaryDark">#3799FB</color>
-  <color name="colorAccent">#FFA728</color>
+  <color name="colorPrimary">#4154A5</color>
+  <color name="colorPrimaryDark">#4154A5</color>
+  <color name="colorAccent">#FF3E3E</color>
   <color name="colorBackGroundCard">#80000000</color>
   <color name="colorCardText">#FFFFFF</color>
   <color name="colorCardStatus">#80FFFFFF</color>
   <color name="colorSelector">#20e2dede</color>
   <color name="colorGreen">#11e049</color>
+  <color name="colorMarker">#4154A5</color>
+  <color name="colorMarkerSecondry">#49C3C3</color>
+  <color name="colorSecondryText">#0A2239</color>
+  <color name="colorBackGroundSecondey">#FAFAFA</color>
 </resources>

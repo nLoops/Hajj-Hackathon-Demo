@@ -238,7 +238,7 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
         mSearchBarCardView.setVisibility(View.INVISIBLE);
 
         if (mRouteLocation != null) {
-          setUpRouting(myLocation, mRouteLocation);
+          setUpRouting(myLocation, mRouteLocation, false);
           FirebaseDatabase database = FirebaseDatabase.getInstance();
           DatabaseReference databaseReference = database.getReference(Constants.DATABASE_ROOT_NODE)
               .child(Constants.DATABASE_CURRENT_CAMPING)
@@ -344,7 +344,7 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
         , HajiActivity.this);
   }
 
-  private void setUpRouting(LatLng startPoint, LatLng endPoint) {
+  private void setUpRouting(LatLng startPoint, LatLng endPoint, boolean shouldUpdate) {
     erasePolys();
     Routing routing = new Routing.Builder()
         .travelMode(AbstractRouting.TravelMode.DRIVING)
@@ -353,7 +353,9 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
         .waypoints(startPoint, endPoint)
         .build();
     routing.execute();
-    isRouting = true;
+    if (shouldUpdate) {
+      isRouting = true;
+    }
   }
 
   @Override
@@ -411,7 +413,7 @@ public class HajiActivity extends FragmentActivity implements OnMapReadyCallback
     if (isRouting) {
       isRouting = false;
       LatLng userLatLng = new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
-      setUpRouting(userLatLng, currentLat);
+      setUpRouting(userLatLng, currentLat, true);
     }
 
   }
