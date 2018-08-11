@@ -19,7 +19,18 @@ import com.nloops.lossless.R;
 import com.nloops.lossless.utilis.Utilis;
 import java.util.Arrays;
 import java.util.List;
+import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * This App Acts like UBER or CAREEM using GoogleMaps API to live track onMaps
+ * this Demo made in HajjHackthon competation to organize more than 2 millions muslim people their
+ * experience of Haj and make loss-less as possible, the idea is every hajj has Unique ID of his camping
+ * stored on the backend which is {@link FirebaseDatabase} once he entered this ID will check the location of
+ * Camping Guide and allow the Hajj to live track his location, as well adding a custom Markers on Map with
+ * very useful and detailed locations that any Hajj need.
+ *
+ * The main activity to look at here {@link HajiActivity}
+ */
 public class CardsActivity extends AppCompatActivity implements CardsAdapter.OnCardClickListener {
 
   private static final int RC_SIGN_IN = 123;

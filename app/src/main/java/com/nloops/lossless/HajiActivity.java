@@ -69,6 +69,10 @@ import java.util.List;
 import org.json.JSONException;
 import pub.devrel.easypermissions.EasyPermissions;
 
+/**
+ * Fetch Data from Backend to track camping Guide and allow to Draw route and using
+ * Google Maps Routing we can start routing
+ */
 public class HajiActivity extends FragmentActivity implements OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
     com.google.android.gms.location.LocationListener, RoutingListener {
